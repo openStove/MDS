@@ -1,6 +1,8 @@
 $MDSModelDeployCMD =  "C:\Program Files\Microsoft SQL Server\130\Master Data Services\Configuration\MDSModelDeploy.exe"
 $outputFolder = "F:\DataManagement\MDS"
 
+Clear-Content "$outputFolder\*"
+
 $list = & $MDSModelDeployCMD listmodels
 
 Write-Host("-----------list:")
@@ -13,6 +15,6 @@ $listResult=[regex]::Match($list,$regex,[System.Text.RegularExpressions.RegexOpt
 $listResult.trim() -split(" ") | ForEach { 
     "Processing Model:$_"
     $package = "$outputFolder\$_.pkg"
-    & $MDSModelDeployCMD createpackage -model $_ -package $package
+    & $MDSModelDeployCMD createpackage -model $_ -package $package -includedata -version "VERSION_1"
     
  }
