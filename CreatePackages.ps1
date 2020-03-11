@@ -13,6 +13,6 @@ $listResult=[regex]::Match($list,$regex,[System.Text.RegularExpressions.RegexOpt
 $listResult.trim() -split(" ") | ForEach { 
     "Processing Model:$_"
     $package = "$outputFolder\$_.pkg"
-    & "C:\Program Files\Microsoft SQL Server\130\Master Data Services\Configuration\MDSModelDeploy.exe" createpackage -model $_ -package $package
+    & $MDSModelDeployCMD createpackage -model $_ -package $package
     
  }
